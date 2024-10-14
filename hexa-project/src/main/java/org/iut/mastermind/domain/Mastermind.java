@@ -4,7 +4,6 @@ import org.iut.mastermind.domain.partie.Joueur;
 import org.iut.mastermind.domain.partie.Partie;
 import org.iut.mastermind.domain.partie.PartieRepository;
 import org.iut.mastermind.domain.partie.ResultatPartie;
-import org.iut.mastermind.domain.proposition.Reponse;
 import org.iut.mastermind.domain.tirage.MotsRepository;
 import org.iut.mastermind.domain.tirage.ServiceNombreAleatoire;
 import org.iut.mastermind.domain.tirage.ServiceTirageMot;
@@ -51,12 +50,12 @@ public class Mastermind {
     // on retourne le résulat de la partie
     private ResultatPartie calculeResultat(Partie partie, String motPropose) {
         this.partieRepository.update(partie);
-        return ResultatPartie.create(partie.tourDeJeu(motPropose), partie.isTerminee());
+        return ResultatPartie.create(partie.tourDeJeu(motPropose), partie.getPartieTerminee());
     }
 
     // si la partie en cours est vide, on renvoie false
     // sinon, on évalue si la partie est terminée
     private boolean isJeuEnCours(Optional<Partie> partieEnCours) {
-        return partieEnCours.isPresent() && !partieEnCours.get().isTerminee();
+        return partieEnCours.isPresent() && !partieEnCours.get().getPartieTerminee();
     }
 }
